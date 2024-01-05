@@ -18,7 +18,8 @@ import {isObjectEmpty} from '../../utils/objectIsEmpty';
 export default function RegisterScreen() {
   const personalFormRef = useRef();
   const workAndJobFormRef = useRef();
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const educationFormRef = useRef();
+  const [currentIndex, setCurrentIndex] = useState(2);
 
   const personalFormSubmit = async () => {
     await personalFormRef.current
@@ -35,7 +36,15 @@ export default function RegisterScreen() {
       .then(response => console.log('Work Form Submit : ', response))
       .catch(res => null);
     if (isObjectEmpty(workAndJobFormRef.current.errors)) {
-      console.log('asd');
+      setCurrentIndex(prevState => prevState + 1);
+    }
+  };
+  const educationFormSubmit = async () => {
+    await educationFormRef.current
+      .submitForm()
+      .then(response => console.log('Work Form Submit : ', response))
+      .catch(res => null);
+    if (isObjectEmpty(educationFormRef.current.errors)) {
       setCurrentIndex(prevState => prevState + 1);
     }
   };
@@ -56,8 +65,8 @@ export default function RegisterScreen() {
     {
       id: 2,
       title: 'Eğitim Seviyesi ve Yetkinlik Bilgileri',
-      component: <Education />,
-      nextAction: () => null,
+      component: <Education educationFormRef={educationFormRef} />,
+      nextAction: async () => await educationFormSubmit(),
     },
     {
       id: 3,
