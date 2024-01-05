@@ -32,7 +32,6 @@ export default function ProjectAndCV({projectAndCVFormRef}) {
     } catch (err) {
       if (DocumentPicker.isCancel(err)) {
       } else {
-        console.log(err);
         Alert.alert('Bir hata oluştu, lütfen tekrar deneyin.');
         throw err;
       }
