@@ -17,7 +17,9 @@ import Button from '../../components/button';
 import {isObjectEmpty} from '../../utils/objectIsEmpty';
 export default function RegisterScreen() {
   const personalFormRef = useRef();
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const workAndJobFormRef = useRef();
+  const [currentIndex, setCurrentIndex] = useState(1);
+
   const personalFormSubmit = async () => {
     await personalFormRef.current
       .submitForm()
@@ -27,6 +29,17 @@ export default function RegisterScreen() {
       setCurrentIndex(prevState => prevState + 1);
     }
   };
+  const workAndJobFormSubmit = async () => {
+    await workAndJobFormRef.current
+      .submitForm()
+      .then(response => console.log('Work Form Submit : ', response))
+      .catch(res => null);
+    if (isObjectEmpty(workAndJobFormRef.current.errors)) {
+      console.log('asd');
+      setCurrentIndex(prevState => prevState + 1);
+    }
+  };
+
   const registerTabItems = [
     {
       id: 0,
@@ -37,8 +50,8 @@ export default function RegisterScreen() {
     {
       id: 1,
       title: 'Çalışma Durumu ve Meslek Bilgileri',
-      component: <WorkAndJob />,
-      nextAction: () => null,
+      component: <WorkAndJob workAndJobFormRef={workAndJobFormRef} />,
+      nextAction: async () => await workAndJobFormSubmit(),
     },
     {
       id: 2,

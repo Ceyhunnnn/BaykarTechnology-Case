@@ -17,16 +17,18 @@ export const personalFormValidate = object({
   name: string()
     .min(3, 'En az 3 karakterden oluşmaktadır')
     .max(15, 'En fazla 15 karakter değer girebilirsiniz')
-    .required('Bu alan boş bırakılamaz'),
+    .required('Lütfen adınızı giriniz'),
   surname: string()
     .min(3, 'En az 3 karakterden oluşmaktadır')
     .max(15, 'En fazla 15 karakter değer girebilirsiniz')
-    .required('Bu alan boş bırakılamaz'),
-  country: string().required('Bu alan boş bırakılamaz'),
-  city: string().required('Bu alan boş bırakılamaz'),
-  identity: string().required('Bu alan boş bırakılamaz'),
-  phone: string().required('Bu alan boş bırakılamaz'),
-  date: string().required('Bu alan boş bırakılamaz'),
-  gender: string().required('Bu alan boş bırakılamaz'),
-  check: boolean().required('').oneOf([true], 'Lütfen KVKK metnini onaylayın.'),
+    .required('lütfen soyadınızı giriniz'),
+  country: string().required('Lütfen ülkenizi seçiniz'),
+  city: string().required('Lütfen şehrinizi seçiniz'),
+  identity: string().required('Lütfen kimlik numaranızı giriniz'),
+  phone: string().required('Lütfen telefon numaranızı giriniz'),
+  date: string().required('Lütfen doğum tarihinizi giriniz'),
+  gender: string().required('Lütfen cinsiyetinizi seçiniz'),
+  check: boolean()
+    .required('')
+    .oneOf([true], 'Lütfen KVKK metnini onaylayınız'),
 });
