@@ -19,7 +19,7 @@ export default function RegisterScreen() {
   const personalFormRef = useRef();
   const workAndJobFormRef = useRef();
   const educationFormRef = useRef();
-  const [currentIndex, setCurrentIndex] = useState(2);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   const personalFormSubmit = async () => {
     await personalFormRef.current

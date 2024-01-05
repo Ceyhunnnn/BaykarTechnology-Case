@@ -14,6 +14,7 @@ import PhoneInput from 'react-native-phone-input';
 import DatePicker from 'react-native-date-picker';
 import ErrorText from '../../../components/ErrorText';
 import {genderList} from '../../../utils/ConstantData';
+import FormTitle from '../../../components/FormTitle';
 
 export default function PersonalScreen({personalFormRef}) {
   const [loading, setLoading] = useState(true);
@@ -101,7 +102,7 @@ export default function PersonalScreen({personalFormRef}) {
                 </>
               )}
             </View>
-
+            <FormTitle title="Kişisel Bilgiler" />
             <TextInput
               onChangeText={handleChange('name')}
               onBlur={handleBlur('name')}
