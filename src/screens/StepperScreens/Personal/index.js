@@ -1,8 +1,9 @@
+/* eslint-disable react-native/no-inline-styles */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-labels */
 /* eslint-disable handle-callback-err */
 /* eslint-disable dot-notation */
-import {View, Text, Image, TextInput, Pressable} from 'react-native';
+import {View, Text, Image, TextInput, Pressable, CheckBox} from 'react-native';
 import React, {useEffect, useRef, useState} from 'react';
 import {styles} from './styles';
 import {launchImageLibrary} from 'react-native-image-picker';
@@ -240,6 +241,16 @@ export default function PersonalScreen({personalFormRef}) {
               </View>
               <ErrorText text={errors.gender} />
             </>
+            <Pressable
+              style={[styles.input, values.check ? {borderColor: 'green'} : '']}
+              onPress={() => {
+                setFieldValue('check', !values.check);
+              }}>
+              <Text style={[values.check ? {color: 'green'} : '']}>
+                KVKK metnini onaylamak için tıklayın
+              </Text>
+            </Pressable>
+            <ErrorText text={errors.check} />
           </View>
         )}
       </Formik>

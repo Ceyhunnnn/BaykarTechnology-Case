@@ -1,4 +1,4 @@
-import {object, string} from 'yup';
+import {boolean, object, string} from 'yup';
 
 export const personalFormInitialValues = {
   photo: '',
@@ -9,6 +9,7 @@ export const personalFormInitialValues = {
   phone: '',
   date: '',
   gender: '',
+  check: false,
 };
 
 export const personalFormValidate = object({
@@ -27,4 +28,5 @@ export const personalFormValidate = object({
   phone: string().required('Bu alan boş bırakılamaz'),
   date: string().required('Bu alan boş bırakılamaz'),
   gender: string().required('Bu alan boş bırakılamaz'),
+  check: boolean().required('').oneOf([true], 'Lütfen KVKK metnini onaylayın.'),
 });
