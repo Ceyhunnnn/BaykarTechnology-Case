@@ -19,7 +19,8 @@ export default function RegisterScreen() {
   const personalFormRef = useRef();
   const workAndJobFormRef = useRef();
   const educationFormRef = useRef();
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const projectAndCVFormRef = useRef();
+  const [currentIndex, setCurrentIndex] = useState(3);
 
   const personalFormSubmit = async () => {
     await personalFormRef.current
@@ -48,6 +49,14 @@ export default function RegisterScreen() {
       setCurrentIndex(prevState => prevState + 1);
     }
   };
+  const projectAndCVFormSubmit = async () => {
+    await projectAndCVFormRef.current
+      .submitForm()
+      .then(response => console.log('Work Form Submit : ', response))
+      .catch(res => null);
+    if (isObjectEmpty(educationFormRef.current.errors)) {
+    }
+  };
 
   const registerTabItems = [
     {
@@ -71,8 +80,8 @@ export default function RegisterScreen() {
     {
       id: 3,
       title: 'CV ve Proje Alanı',
-      component: <ProjectAndCV />,
-      save: () => null,
+      component: <ProjectAndCV projectAndCVFormRef={projectAndCVFormRef} />,
+      save: async () => await projectAndCVFormSubmit(),
     },
   ];
   const prevStepAction = () => {

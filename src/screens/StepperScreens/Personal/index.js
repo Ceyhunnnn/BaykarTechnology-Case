@@ -80,6 +80,7 @@ export default function PersonalScreen({personalFormRef}) {
         initialValues={personalFormInitialValues}>
         {({handleChange, handleBlur, values, errors, setFieldValue}) => (
           <View>
+            <FormTitle title={'Profil Fotoğrafı'} />
             <View style={styles.profilePhotoArea}>
               {values.photo ? (
                 <>

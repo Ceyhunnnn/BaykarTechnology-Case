@@ -12,9 +12,10 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 5,
     borderRadius: 30,
+    borderStyle: 'dashed',
     borderColor: 'gray',
-    height: 150,
-    width: 150,
+    height: 130,
+    width: 130,
     textAlign: 'center',
     display: 'flex',
     justifyContent: 'center',
@@ -23,8 +24,8 @@ const styles = StyleSheet.create({
   },
   profileImage: {
     borderRadius: 100,
-    width: 150,
-    height: 150,
+    width: 130,
+    height: 130,
     position: 'relative',
   },
   removePhotoButton: {
