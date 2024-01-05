@@ -95,7 +95,7 @@ export default function Education({educationFormRef}) {
               {educationFormRef?.current?.values?.experienceList &&
                 educationFormRef?.current?.values?.experienceList?.map(exp => (
                   <View style={styles.experiencePosition} key={exp.id}>
-                    <View style={styles.experienceContent}>
+                    <View>
                       <Text style={{fontSize: 15}}>{exp.experienceName}</Text>
                       <Text style={{fontSize: 11}}>{exp.experienceDegree}</Text>
                     </View>
@@ -125,7 +125,6 @@ export default function Education({educationFormRef}) {
                     placeholder="Yetkinlik Adı"
                     style={[styles.input, {width: 250}]}
                   />
-                  <ErrorText text={errors.experienceName} />
                   <FormTitle title="Yetkinlik Derecesi" />
                   <View style={[styles.input, {width: 250}]}>
                     <RNPickerSelect
@@ -145,7 +144,6 @@ export default function Education({educationFormRef}) {
                       value={experienceDegree}
                     />
                   </View>
-                  <ErrorText text={errors.experienceDegree} />
                   <View style={styles.modalButtonArea}>
                     <Pressable
                       onPress={() => {
@@ -158,12 +156,12 @@ export default function Education({educationFormRef}) {
                     <Button
                       title="Kaydet"
                       onPress={() => {
-                        if (experienceName && experienceDegree) {
+                        if (experienceName.trim() !== '' && experienceDegree) {
                           educationFormRef.current.values.experienceList.push({
                             id:
                               educationFormRef.current.values.experienceList
                                 .length + experienceDegree,
-                            experienceName: experienceName,
+                            experienceName: experienceName.trim(),
                             experienceDegree: experienceDegree,
                           });
                           setExperienceModal(false);
