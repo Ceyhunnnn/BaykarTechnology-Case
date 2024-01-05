@@ -18,7 +18,7 @@ import {isObjectEmpty} from '../../utils/objectIsEmpty';
 export default function RegisterScreen() {
   const personalFormRef = useRef();
   const workAndJobFormRef = useRef();
-  const [currentIndex, setCurrentIndex] = useState(1);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   const personalFormSubmit = async () => {
     await personalFormRef.current

@@ -13,7 +13,7 @@ export const personalFormInitialValues = {
 };
 
 export const personalFormValidate = object({
-  photo: string().required('Lütfen Profil fotoğrafı seçin.'),
+  photo: string().required('Lütfen Profil fotoğrafı seçiniz'),
   name: string()
     .min(3, 'En az 3 karakterden oluşmaktadır')
     .max(15, 'En fazla 15 karakter değer girebilirsiniz')
