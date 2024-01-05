@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import {View, Text, Button, Modal, Pressable} from 'react-native';
+import {View, Text, Button, Modal, Pressable, Image} from 'react-native';
 import React, {useState} from 'react';
 import {styles} from './styles';
 import RNPickerSelect from 'react-native-picker-select';
@@ -13,6 +13,7 @@ import {
 } from '../../../utils/ConstantData';
 import FormTitle from '../../../components/FormTitle';
 import {TextInput} from 'react-native-gesture-handler';
+import {DeleteIcon} from '../../../components/Icons';
 
 export default function Education({educationFormRef}) {
   const [experienceModal, setExperienceModal] = useState(false);
@@ -100,7 +101,7 @@ export default function Education({educationFormRef}) {
                       <Text style={{fontSize: 11}}>{exp.experienceDegree}</Text>
                     </View>
                     <Pressable onPress={() => deleteExperience(exp)}>
-                      <Text style={{color: 'red'}}>Kaldır</Text>
+                      <DeleteIcon />
                     </Pressable>
                   </View>
                 ))}

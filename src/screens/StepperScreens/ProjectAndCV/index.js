@@ -21,6 +21,7 @@ import {
 import DocumentPicker from 'react-native-document-picker';
 import ErrorText from '../../../components/ErrorText';
 import {imageList} from '../../../utils/imageList';
+import {DeleteIcon, EditIcon} from '../../../components/Icons';
 
 export default function ProjectAndCV({projectAndCVFormRef}) {
   const [projectModal, setProjectModal] = useState(false);
@@ -95,9 +96,11 @@ export default function ProjectAndCV({projectAndCVFormRef}) {
                   {values.cvDocument.uri && (
                     <>
                       <Image source={imageList.pdf} style={styles.pdf} />
-                      <Text onPress={removeDocument} style={styles.removePdf}>
-                        Sil
-                      </Text>
+                      <Pressable
+                        style={styles.removePdf}
+                        onPress={removeDocument}>
+                        <DeleteIcon />
+                      </Pressable>
                       {values.cvDocument.name && (
                         <Text style={styles.documentName}>
                           {values.cvDocument.name}
@@ -127,17 +130,15 @@ export default function ProjectAndCV({projectAndCVFormRef}) {
                         </Text>
                       </View>
                       <View style={styles.eventArea}>
-                        <Text
+                        <Pressable
                           onPress={() => {
                             addDetailArea(project);
                           }}>
-                          Detay Ekle
-                        </Text>
-                        <Text
-                          style={{color: 'red'}}
-                          onPress={() => deleteProject(project)}>
-                          Sil
-                        </Text>
+                          <EditIcon />
+                        </Pressable>
+                        <Pressable onPress={() => deleteProject(project)}>
+                          <DeleteIcon />
+                        </Pressable>
                       </View>
                     </View>
                     <View>
@@ -150,13 +151,12 @@ export default function ProjectAndCV({projectAndCVFormRef}) {
                               placeholder={detail.placeholder}
                               style={styles.input}
                             />
-                            <Text
-                              style={{color: 'red'}}
+                            <Pressable
                               onPress={() =>
                                 deleteProjectDetail(project, detail)
                               }>
-                              Sil
-                            </Text>
+                              <DeleteIcon />
+                            </Pressable>
                           </View>
                         ))}
                     </View>

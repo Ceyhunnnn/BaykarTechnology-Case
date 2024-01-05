@@ -3,7 +3,7 @@
 /* eslint-disable no-labels */
 /* eslint-disable handle-callback-err */
 /* eslint-disable dot-notation */
-import {View, Text, Image, TextInput, Pressable, CheckBox} from 'react-native';
+import {View, Text, Image, TextInput, Pressable} from 'react-native';
 import React, {useEffect, useRef, useState} from 'react';
 import {styles} from './styles';
 import {launchImageLibrary} from 'react-native-image-picker';
@@ -15,6 +15,7 @@ import DatePicker from 'react-native-date-picker';
 import ErrorText from '../../../components/ErrorText';
 import {genderList} from '../../../utils/ConstantData';
 import FormTitle from '../../../components/FormTitle';
+import {DeleteIcon} from '../../../components/Icons';
 
 export default function PersonalScreen({personalFormRef}) {
   const [loading, setLoading] = useState(true);
@@ -88,11 +89,12 @@ export default function PersonalScreen({personalFormRef}) {
                     source={{uri: values.photo}}
                     style={styles.profileImage}
                   />
-                  <Text
+
+                  <Pressable
                     onPress={removeProfileImage}
                     style={styles.removePhotoButton}>
-                    Sil
-                  </Text>
+                    <DeleteIcon />
+                  </Pressable>
                 </>
               ) : (
                 <>
