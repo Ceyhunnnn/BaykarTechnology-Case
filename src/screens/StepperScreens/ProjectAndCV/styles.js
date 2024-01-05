@@ -20,6 +20,21 @@ const styles = StyleSheet.create({
     borderColor: 'gray',
     height: 130,
     width: 130,
+    marginBottom: 5,
+  },
+  pdf: {
+    width: 130,
+    height: 130,
+    position: 'relative',
+  },
+  removePdf: {
+    position: 'absolute',
+    top: 0,
+    right: 120,
+  },
+  documentName: {
+    marginTop: 10,
+    fontWeight: '600',
   },
 });
 export {styles};

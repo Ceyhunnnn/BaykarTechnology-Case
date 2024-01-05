@@ -52,7 +52,7 @@ export default function RegisterScreen() {
   const projectAndCVFormSubmit = async () => {
     await projectAndCVFormRef.current
       .submitForm()
-      .then(response => console.log('Work Form Submit : ', response))
+      .then(response => console.log('project Form Submit : ', response))
       .catch(res => null);
     if (isObjectEmpty(educationFormRef.current.errors)) {
     }

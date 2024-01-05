@@ -97,7 +97,7 @@ export default function PersonalScreen({personalFormRef}) {
               ) : (
                 <>
                   <Pressable onPress={uploadImage} style={styles.uploadButton}>
-                    <Text>Upload Image</Text>
+                    <Text>Fotoğraf Yükle</Text>
                   </Pressable>
                   <ErrorText text={errors.photo} />
                 </>
