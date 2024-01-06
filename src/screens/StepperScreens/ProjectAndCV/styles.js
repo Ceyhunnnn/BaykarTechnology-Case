@@ -22,6 +22,16 @@ const styles = StyleSheet.create({
     width: 130,
     marginBottom: 5,
   },
+  input: {
+    width: '80%',
+    height: 40,
+    borderWidth: 0.5,
+    marginHorizontal: 20,
+    padding: 10,
+    borderRadius: 10,
+    borderColor: 'gray',
+    margin: 5,
+  },
   pdf: {
     width: 130,
     height: 130,

@@ -64,10 +64,10 @@ export default function ProjectAndCV({projectAndCVFormRef}) {
   };
   const addDetailArea = project => {
     project.detailList.push({
-      name: project.detailList.length + 1 + '. detay',
+      name: project.detailList.length + 1 + '.detay',
       placeholder: 'Detay',
       value: '',
-      id: project.detailList.length + 1,
+      id: project.detailList.length + 1 + 'id',
     });
     updateProjectList(project);
   };
@@ -155,7 +155,7 @@ export default function ProjectAndCV({projectAndCVFormRef}) {
                               onChangeText={text => (detail.value = text)}
                               placeholderTextColor="gray"
                               placeholder={detail.placeholder}
-                              style={globalStyles.input}
+                              style={[styles.input, {width: 250}]}
                             />
                             <Pressable
                               onPress={() =>
@@ -182,7 +182,7 @@ export default function ProjectAndCV({projectAndCVFormRef}) {
               value={projectName}
               placeholderTextColor="gray"
               placeholder="Proje Adı"
-              style={[globalStyles.input, {width: 250}]}
+              style={[styles.input, {width: 250}]}
             />
             <View style={globalStyles.modalButtonArea}>
               <Pressable
