@@ -104,7 +104,7 @@ export default function ProjectAndCV({projectAndCVFormRef}) {
                       <Pressable
                         style={styles.removePdf}
                         onPress={removeDocument}>
-                        <DeleteIcon />
+                        <DeleteIcon size={32} color="red" />
                       </Pressable>
                       {values.cvDocument.name && (
                         <Text style={styles.documentName}>
@@ -139,10 +139,10 @@ export default function ProjectAndCV({projectAndCVFormRef}) {
                           onPress={() => {
                             addDetailArea(project);
                           }}>
-                          <EditIcon />
+                          <EditIcon size={20} color="black" />
                         </Pressable>
                         <Pressable onPress={() => deleteProject(project)}>
-                          <DeleteIcon />
+                          <DeleteIcon size={32} color="red" />
                         </Pressable>
                       </View>
                     </View>
@@ -160,7 +160,7 @@ export default function ProjectAndCV({projectAndCVFormRef}) {
                               onPress={() =>
                                 deleteProjectDetail(project, detail)
                               }>
-                              <DeleteIcon />
+                              <DeleteIcon size={32} color="red" />
                             </Pressable>
                           </View>
                         ))}

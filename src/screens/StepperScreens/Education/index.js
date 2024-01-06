@@ -101,7 +101,7 @@ export default function Education({educationFormRef}) {
                       <Text style={{fontSize: 11}}>{exp.experienceDegree}</Text>
                     </View>
                     <Pressable onPress={() => deleteExperience(exp)}>
-                      <DeleteIcon />
+                      <DeleteIcon size={32} color="red" />
                     </Pressable>
                   </View>
                 ))}

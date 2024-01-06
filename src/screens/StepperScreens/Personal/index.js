@@ -93,7 +93,7 @@ export default function PersonalScreen({personalFormRef}) {
                   <Pressable
                     onPress={removeProfileImage}
                     style={styles.removePhotoButton}>
-                    <DeleteIcon />
+                    <DeleteIcon size={32} color="red" />
                   </Pressable>
                 </>
               ) : (

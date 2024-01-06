@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/react-in-jsx-scope */
 import {NavigationContainer} from '@react-navigation/native';
@@ -13,6 +14,7 @@ import AsyncStorageService from '../service/AsyncStorage';
 import {useDispatch, useSelector} from 'react-redux';
 import {setLoginState} from '../features/login/loginSlice';
 import {ActivityIndicator} from 'react-native';
+import {ApiIcon, DashboardIcon} from '../components/Icons';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -25,6 +27,9 @@ const HomeLayout = () => {
         options={{
           headerShown: false,
           tabBarLabel: 'Dashboard',
+          tabBarIcon: ({color, size}) => (
+            <DashboardIcon size={size} color={color} />
+          ),
         }}
         component={DashboardScreen}
       />
@@ -33,6 +38,7 @@ const HomeLayout = () => {
         options={{
           headerShown: false,
           tabBarLabel: 'Fake Api',
+          tabBarIcon: ({color, size}) => <ApiIcon size={size} color={color} />,
         }}
         component={FakeApiScreen}
       />
