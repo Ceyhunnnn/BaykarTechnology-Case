@@ -1,12 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import {
-  View,
-  Text,
-  ActivityIndicator,
-  Image,
-  ScrollView,
-  Pressable,
-} from 'react-native';
+import {View, Text, Image, ScrollView, Pressable} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {styles} from './styles';
 import AsyncStorageService from '../../service/AsyncStorage';
@@ -27,6 +20,7 @@ import {
   StartIcon,
 } from '../../components/Icons';
 import {generateExperienceScore} from '../../utils/ConstantData';
+import LoadingIndicator from './../../components/loading';
 
 function DashboardScreen({navigation}) {
   const [loading, setLoading] = useState(true);
@@ -46,11 +40,7 @@ function DashboardScreen({navigation}) {
   };
 
   if (loading) {
-    return (
-      <View style={styles.indicator}>
-        <ActivityIndicator />
-      </View>
-    );
+    return <LoadingIndicator />;
   }
   return (
     <View style={styles.container}>

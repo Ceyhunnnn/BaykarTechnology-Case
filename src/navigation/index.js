@@ -13,9 +13,8 @@ import {useEffect, useState} from 'react';
 import AsyncStorageService from '../service/AsyncStorage';
 import {useDispatch, useSelector} from 'react-redux';
 import {setLoginState} from '../features/login/loginSlice';
-import {ActivityIndicator} from 'react-native';
 import {ApiIcon, DashboardIcon} from '../components/Icons';
-
+import LoadingIndicator from '../components/loading';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -59,7 +58,7 @@ const Routes = () => {
     checkUserLogin();
   }, [isLogin]);
   if (loading) {
-    return <ActivityIndicator />;
+    return <LoadingIndicator />;
   }
   return (
     <NavigationContainer>
