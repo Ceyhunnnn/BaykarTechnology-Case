@@ -1,10 +1,32 @@
-import {View, Text, ActivityIndicator, Image, Button} from 'react-native';
+/* eslint-disable react-native/no-inline-styles */
+import {
+  View,
+  Text,
+  ActivityIndicator,
+  Image,
+  ScrollView,
+  Pressable,
+} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {styles} from './styles';
 import AsyncStorageService from '../../service/AsyncStorage';
 import FormTitle from '../../components/FormTitle';
 import {Logout} from '../../modules/Logout';
 import {PathConstant} from '../../navigation/PathConstant';
+import {
+  CalendarIcon,
+  CheckIcon,
+  EducationIcon,
+  ExperienceIcon,
+  GenderIcon,
+  GraduateIcon,
+  IdentityCard,
+  LocationIcon,
+  PhoneIcon,
+  ProjectIcon,
+  StartIcon,
+} from '../../components/Icons';
+import {generateExperienceScore} from '../../utils/ConstantData';
 
 function DashboardScreen({navigation}) {
   const [loading, setLoading] = useState(true);
@@ -22,77 +44,160 @@ function DashboardScreen({navigation}) {
   const logoutEvent = async () => {
     await Logout().then(() => navigation.replace(PathConstant.LOGIN));
   };
+
   if (loading) {
     return (
-      <View style={styles.container}>
+      <View style={styles.indicator}>
         <ActivityIndicator />
       </View>
     );
   }
   return (
     <View style={styles.container}>
-      <View>
-        <FormTitle title="kişisel veriler" />
-        <Image
-          source={{uri: userData.personal.photo}}
-          width={100}
-          height={100}
-        />
-        <Text>kullanıcı adı {userData.personal.name}</Text>
-        <Text>kullanıcı soyadı {userData.personal.surname}</Text>
-        <Text>kullanıcı ülke {userData.personal.country}</Text>
-        <Text>kullanıcı şehir {userData.personal.city}</Text>
-        <Text>kullanıcı cinsiyet {userData.personal.gender}</Text>
-        <Text>kullanıcı telefon {userData.personal.phone}</Text>
-        <Text>kullanıcı kimlik {userData.personal.identity}</Text>
-        <Text>
-          kullanıcı dogum tarihi {userData.personal.date.split('T')[0]}
-        </Text>
-      </View>
-      <View>
-        <FormTitle title="iş verileri" />
-        <Text>kullanıcı iş durumu {userData.work.workType}</Text>
-        <Text>kullanıcı meslek {userData.work.jobType}</Text>
-      </View>
-      <View>
-        <FormTitle title="Eğitim kısımları" />
-        <Text>
-          kullanıcı eğitim seviyesi {userData.education.educationLevel}
-        </Text>
-        <Text>kullanıcı okul {userData.education.school}</Text>
-        <Text>kullanıcı alanı {userData.education.department}</Text>
-        <Text>kullanıcı mezun yılı {userData.education.graduationYear}</Text>
-        <Text>kullancını deneyim listesi</Text>
-        <View>
-          {userData.education.experienceList.map(edu => (
-            <Text key={edu.id}>
-              {'-> adı '}
-              {edu.experienceName}
-              {'-> seviyesi '} {edu.experienceDegree}
-            </Text>
-          ))}
+      <ScrollView>
+        <View style={styles.coverArea}>
+          {/* <Image source={''} style={styles.coverPhoto} /> */}
+          <Image
+            style={styles.profilePhoto}
+            source={{uri: userData.personal.photo}}
+            width={120}
+            height={120}
+          />
         </View>
-      </View>
-      <View>
-        <FormTitle title="Proje ve CV kısımları" />
-        <Text>kullanıcı projeleri</Text>
-        <View>
-          {userData.project.project.map(proj => (
-            <Text key={proj.id}>
-              {'-> adı '}
-              {proj.projectName}
-              {proj.detailList &&
-                proj.detailList.map(detail => (
-                  <Text key={detail.id}>
-                    {'-> texti'}
-                    {detail.value}
-                  </Text>
-                ))}
+        <View style={styles.infoArea}>
+          <Text style={styles.names}>
+            {userData.personal.name} {userData.personal.surname}
+          </Text>
+          <View style={styles.jobArea}>
+            <Text style={{fontSize: 14}}>
+              {userData.work.workType.split(' ')[0]}
             </Text>
-          ))}
+            <View style={styles.divider} />
+            <Text style={{fontSize: 14}}>{userData.work.jobType}</Text>
+          </View>
         </View>
-      </View>
-      <Button title="Çıkış yap" onPress={logoutEvent} />
+        <FormTitle title="Kişisel Bilgiler" />
+        <View style={styles.card}>
+          <View style={styles.infoContent}>
+            <View style={styles.iconArea}>
+              <IdentityCard size={20} />
+            </View>
+            <Text>{userData.personal.identity}</Text>
+          </View>
+          <View style={styles.infoContent}>
+            <View style={styles.iconArea}>
+              <CalendarIcon size={20} />
+            </View>
+            <Text>{userData.personal.date.split('T')[0]}</Text>
+          </View>
+          <View style={styles.infoContent}>
+            <View style={styles.iconArea}>
+              <GenderIcon size={20} />
+            </View>
+            <Text>{userData.personal.gender}</Text>
+          </View>
+          <View style={styles.infoContent}>
+            <View style={styles.iconArea}>
+              <PhoneIcon size={20} />
+            </View>
+            <Text>{userData.personal.phone}</Text>
+          </View>
+          <View style={styles.infoContent}>
+            <View style={styles.iconArea}>
+              <LocationIcon size={22} />
+            </View>
+            <Text>
+              {userData.personal.city} {userData.personal.country}
+            </Text>
+          </View>
+        </View>
+        <FormTitle title="Eğitim Bilgisi" />
+        <View style={styles.card}>
+          <View style={[styles.infoContent, {alignItems: 'start'}]}>
+            <View style={styles.iconArea}>
+              <EducationIcon size={22} />
+            </View>
+            <View>
+              <Text>{userData.education.school}</Text>
+              <Text style={{color: '#4b4b4b'}}>
+                {userData.education.department}
+              </Text>
+            </View>
+          </View>
+          <View style={styles.infoContent}>
+            <View style={styles.iconArea}>
+              <GraduateIcon size={20} />
+            </View>
+            <Text>
+              {userData.education.graduationYear}
+              {' - '}
+              {userData.education.educationLevel}
+            </Text>
+          </View>
+        </View>
+        {userData.education.experienceList && (
+          <>
+            <FormTitle title="Deneyimler" />
+            <View style={styles.card}>
+              {userData.education.experienceList.map(edu => (
+                <View key={edu.id} style={styles.experience}>
+                  <View style={styles.infoContent}>
+                    <View style={styles.iconArea}>
+                      <ExperienceIcon size={20} />
+                    </View>
+                    <Text>{edu.experienceName}</Text>
+                  </View>
+                  <View style={styles.star}>
+                    {Array.from(
+                      {length: generateExperienceScore[edu.experienceDegree]},
+                      (_, i) => (
+                        <StartIcon size={18} key={i} />
+                      ),
+                    )}
+                  </View>
+                </View>
+              ))}
+            </View>
+          </>
+        )}
+        {userData.project.project && (
+          <>
+            <FormTitle title="Projeler" />
+            <View style={[styles.card, {marginBottom: 20}]}>
+              {userData.project.project.map(proj => (
+                <View key={proj.id}>
+                  <View style={styles.infoContent}>
+                    <View style={styles.iconArea}>
+                      <ProjectIcon size={22} />
+                    </View>
+                    <Text style={{fontWeight: '600'}}>{proj.projectName}</Text>
+                  </View>
+                  {proj.detailList &&
+                    proj.detailList.map(detail => (
+                      <View key={detail.id} style={styles.projectDetailArea}>
+                        <CheckIcon size={20} color="green" />
+                        <Text style={{fontStyle: 'italic'}}>
+                          {detail.value}
+                        </Text>
+                      </View>
+                    ))}
+                </View>
+              ))}
+            </View>
+          </>
+        )}
+        <Pressable onPress={logoutEvent}>
+          <Text
+            style={{
+              textAlign: 'center',
+              marginVertical: 10,
+              fontSize: 18,
+              color: 'red',
+            }}>
+            Hesabı Sil
+          </Text>
+        </Pressable>
+      </ScrollView>
     </View>
   );
 }
