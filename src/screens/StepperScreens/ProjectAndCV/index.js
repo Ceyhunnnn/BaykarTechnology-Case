@@ -10,7 +10,7 @@ import {
   Modal,
   TextInput,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {styles} from './styles';
 import FormTitle from '../../../components/FormTitle';
 import {Formik} from 'formik';
@@ -69,6 +69,7 @@ export default function ProjectAndCV({projectAndCVFormRef}) {
       id: project.detailList.length + 1,
     });
     updateProjectList(project);
+    projectAndCVFormRef.current.setFieldValue('projectDetail', projectList);
   };
   const deleteProjectDetail = (project, detail) => {
     const updatedList = project.detailList.filter(
@@ -81,6 +82,11 @@ export default function ProjectAndCV({projectAndCVFormRef}) {
     const updatedList = projectList.filter(pr => pr.id !== project.id);
     setProjectList(updatedList);
   };
+  useEffect(() => {
+    if (projectList) {
+      projectAndCVFormRef.current.setFieldValue('project', projectList);
+    }
+  }, [projectAndCVFormRef, projectList]);
   return (
     <View>
       <Formik
