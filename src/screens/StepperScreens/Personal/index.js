@@ -13,16 +13,19 @@ import RNPickerSelect from 'react-native-picker-select';
 import PhoneInput from 'react-native-phone-input';
 import DatePicker from 'react-native-date-picker';
 import ErrorText from '../../../components/ErrorText';
-import {genderList} from '../../../utils/ConstantData';
+import {
+  REST_COUNTRY_API_URL,
+  REST_CITY_API_URL,
+  genderList,
+} from '../../../utils/constantData';
 import FormTitle from '../../../components/FormTitle';
 import {DeleteIcon} from '../../../components/Icons';
+import globalStyles from '../../../utils/globalStyles';
 
 export default function PersonalScreen({personalFormRef}) {
   const [loading, setLoading] = useState(true);
   const phone = useRef();
   const [open, setOpen] = useState(false);
-  const REST_COUNTRY_API = 'https://restcountries.com/v3.1/all';
-  const REST_CITY_API = 'https://countriesnow.space/api/v0.1/countries/cities';
   const [selectedCountry, setSelectedCountry] = useState(null);
   const [countries, setCountries] = useState('');
   const [cities, setCities] = useState('');
@@ -39,7 +42,7 @@ export default function PersonalScreen({personalFormRef}) {
     personalFormRef.current.validateField('photo');
   };
   useEffect(() => {
-    fetch(REST_COUNTRY_API)
+    fetch(REST_COUNTRY_API_URL)
       .then(response => response.json())
       .then(json => {
         const countryData = json?.map((country, index) => ({
@@ -53,7 +56,7 @@ export default function PersonalScreen({personalFormRef}) {
   }, []);
   useEffect(() => {
     if (selectedCountry) {
-      fetch(REST_CITY_API, {
+      fetch(REST_CITY_API_URL, {
         method: 'POST',
         headers: {
           Accept: 'application/json',
@@ -112,7 +115,7 @@ export default function PersonalScreen({personalFormRef}) {
               value={values.name}
               placeholderTextColor="gray"
               placeholder="Kullanıcı Adı"
-              style={styles.input}
+              style={globalStyles.input}
             />
             <ErrorText text={errors.name} />
             <TextInput
@@ -121,7 +124,7 @@ export default function PersonalScreen({personalFormRef}) {
               value={values.surname}
               placeholderTextColor="gray"
               placeholder="Kullanıcı Soyadı"
-              style={styles.input}
+              style={globalStyles.input}
             />
             <ErrorText text={errors.surname} />
 
@@ -131,13 +134,13 @@ export default function PersonalScreen({personalFormRef}) {
               value={values.identity}
               placeholderTextColor="gray"
               placeholder="Kimlik Numarası"
-              style={styles.input}
+              style={globalStyles.input}
             />
             <ErrorText text={errors.identity} />
 
             {countries && !loading ? (
               <>
-                <View style={styles.input}>
+                <View style={globalStyles.input}>
                   <RNPickerSelect
                     style={{
                       placeholder: {
@@ -163,7 +166,7 @@ export default function PersonalScreen({personalFormRef}) {
             )}
             {cities && selectedCountry && (
               <>
-                <View style={styles.input}>
+                <View style={globalStyles.input}>
                   <RNPickerSelect
                     placeholder={{label: 'Şehir Seçiniz', value: ''}}
                     items={cities}
@@ -182,7 +185,7 @@ export default function PersonalScreen({personalFormRef}) {
               </>
             )}
             <PhoneInput
-              style={styles.input}
+              style={globalStyles.input}
               textProps={{
                 placeholder: 'Telefon bilgilerinizi girin',
               }}
@@ -202,7 +205,7 @@ export default function PersonalScreen({personalFormRef}) {
               value={JSON.stringify(values.date).split('T')[0].split('"')[1]}
               placeholderTextColor="gray"
               placeholder="Doğum Tarihi"
-              style={styles.input}
+              style={globalStyles.input}
               editable={false}
               selectTextOnFocus={false}
               onPressIn={() => setOpen(true)}
@@ -228,7 +231,7 @@ export default function PersonalScreen({personalFormRef}) {
             </View>
             <ErrorText text={errors.date} />
             <>
-              <View style={styles.input}>
+              <View style={globalStyles.input}>
                 <RNPickerSelect
                   placeholder={{label: 'Cinsiyet Seçin', value: ''}}
                   items={genderList}
@@ -246,7 +249,10 @@ export default function PersonalScreen({personalFormRef}) {
               <ErrorText text={errors.gender} />
             </>
             <Pressable
-              style={[styles.input, values.check ? {borderColor: 'green'} : '']}
+              style={[
+                globalStyles.input,
+                values.check ? {borderColor: 'green'} : '',
+              ]}
               onPress={() => {
                 setFieldValue('check', !values.check);
               }}>

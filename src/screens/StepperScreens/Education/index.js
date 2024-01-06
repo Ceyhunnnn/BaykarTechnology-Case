@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import {View, Text, Button, Modal, Pressable, Image} from 'react-native';
+import {View, Text, Button, Modal, Pressable} from 'react-native';
 import React, {useState} from 'react';
 import {styles} from './styles';
 import RNPickerSelect from 'react-native-picker-select';
@@ -10,10 +10,11 @@ import {
   educationLevel,
   experinceLevel,
   graduationYear,
-} from '../../../utils/ConstantData';
+} from '../../../utils/constantData';
 import FormTitle from '../../../components/FormTitle';
 import {TextInput} from 'react-native-gesture-handler';
 import {DeleteIcon} from '../../../components/Icons';
+import globalStyles from '../../../utils/globalStyles';
 
 export default function Education({educationFormRef}) {
   const [experienceModal, setExperienceModal] = useState(false);
@@ -34,7 +35,7 @@ export default function Education({educationFormRef}) {
         {({handleChange, handleBlur, values, errors, setFieldValue}) => (
           <View>
             <FormTitle title="Eğitim seviyenizi ve yetkinlik bilgilerinizi giriniz" />
-            <View style={styles.input}>
+            <View style={globalStyles.input}>
               <RNPickerSelect
                 style={{
                   placeholder: {
@@ -60,7 +61,7 @@ export default function Education({educationFormRef}) {
               value={values.school}
               placeholderTextColor="gray"
               placeholder="Okul Adı"
-              style={styles.input}
+              style={globalStyles.input}
             />
             <ErrorText text={errors.school} />
             <TextInput
@@ -69,10 +70,10 @@ export default function Education({educationFormRef}) {
               value={values.department}
               placeholderTextColor="gray"
               placeholder="Bölüm Adı"
-              style={styles.input}
+              style={globalStyles.input}
             />
             <ErrorText text={errors.department} />
-            <View style={styles.input}>
+            <View style={globalStyles.input}>
               <RNPickerSelect
                 style={{
                   placeholder: {
@@ -116,18 +117,18 @@ export default function Education({educationFormRef}) {
               animationType="fade"
               transparent={true}
               visible={experienceModal}>
-              <View style={styles.centeredView}>
-                <View style={styles.modalView}>
+              <View style={globalStyles.centeredView}>
+                <View style={globalStyles.modalView}>
                   <FormTitle title="Yetkinlik Adı" />
                   <TextInput
                     onChangeText={value => setExperienceName(value)}
                     value={experienceName}
                     placeholderTextColor="gray"
                     placeholder="Yetkinlik Adı"
-                    style={[styles.input, {width: 250}]}
+                    style={[globalStyles.input, {width: 250}]}
                   />
                   <FormTitle title="Yetkinlik Derecesi" />
-                  <View style={[styles.input, {width: 250}]}>
+                  <View style={[globalStyles.input, {width: 250}]}>
                     <RNPickerSelect
                       style={{
                         placeholder: {
@@ -145,7 +146,7 @@ export default function Education({educationFormRef}) {
                       value={experienceDegree}
                     />
                   </View>
-                  <View style={styles.modalButtonArea}>
+                  <View style={globalStyles.modalButtonArea}>
                     <Pressable
                       onPress={() => {
                         setExperienceModal(false);

@@ -7,7 +7,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-
   activeTextArea: {
     display: 'flex',
     justifyContent: 'center',

@@ -21,6 +21,7 @@ import {PathConstant} from '../../navigation/PathConstant';
 import ErrorText from '../../components/ErrorText';
 import AsyncStorageService from '../../service/AsyncStorage';
 import isEqual from 'lodash/isEqual';
+import globalStyles from '../../utils/globalStyles';
 
 export default function LoginScreen({navigation}) {
   const login = async values => {
@@ -71,7 +72,7 @@ export default function LoginScreen({navigation}) {
                   value={values.name}
                   placeholderTextColor="gray"
                   placeholder="Kullanıcı Adı"
-                  style={styles.input}
+                  style={globalStyles.input}
                 />
                 <ErrorText text={errors.name} />
                 <TextInput
@@ -80,7 +81,7 @@ export default function LoginScreen({navigation}) {
                   value={values.surname}
                   placeholder="Kullanıcı Soyadı"
                   placeholderTextColor="gray"
-                  style={styles.input}
+                  style={globalStyles.input}
                 />
                 <ErrorText text={errors.surname} />
                 <Button title="Giriş Yap" onPress={handleSubmit} />

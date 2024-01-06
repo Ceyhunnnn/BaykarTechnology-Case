@@ -33,14 +33,5 @@ const styles = StyleSheet.create({
     bottom: 0,
     right: 120,
   },
-  input: {
-    height: 40,
-    borderWidth: 0.5,
-    marginHorizontal: 20,
-    padding: 10,
-    borderRadius: 10,
-    borderColor: 'gray',
-    margin: 5,
-  },
 });
 export {styles};

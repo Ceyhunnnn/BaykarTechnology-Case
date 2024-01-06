@@ -1,12 +1,12 @@
-import {View, Text} from 'react-native';
+import {View} from 'react-native';
 import React from 'react';
-import {styles} from './styles';
 import {Formik} from 'formik';
 import ErrorText from '../../../components/ErrorText';
 import {workAndJobFormValidate, workAndJobInitialValues} from './validation';
-import {jobTypes, workTypes} from '../../../utils/ConstantData';
+import {jobTypes, workTypes} from '../../../utils/constantData';
 import RNPickerSelect from 'react-native-picker-select';
 import FormTitle from '../../../components/FormTitle';
+import globalStyles from '../../../utils/globalStyles';
 
 export default function WorkAndJob({workAndJobFormRef}) {
   return (
@@ -18,7 +18,7 @@ export default function WorkAndJob({workAndJobFormRef}) {
         {({handleChange, handleBlur, values, errors, setFieldValue}) => (
           <View>
             <FormTitle title="Çalışma durumunuzu ve meslek bilgilerinizi giriniz" />
-            <View style={styles.input}>
+            <View style={globalStyles.input}>
               <RNPickerSelect
                 style={{
                   placeholder: {
@@ -37,7 +37,7 @@ export default function WorkAndJob({workAndJobFormRef}) {
               />
             </View>
             <ErrorText text={errors.workType} />
-            <View style={styles.input}>
+            <View style={globalStyles.input}>
               <RNPickerSelect
                 style={{
                   placeholder: {

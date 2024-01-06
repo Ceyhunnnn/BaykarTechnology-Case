@@ -22,6 +22,7 @@ import DocumentPicker from 'react-native-document-picker';
 import ErrorText from '../../../components/ErrorText';
 import {imageList} from '../../../utils/imageList';
 import {DeleteIcon, EditIcon} from '../../../components/Icons';
+import globalStyles from '../../../utils/globalStyles';
 
 export default function ProjectAndCV({projectAndCVFormRef}) {
   const [projectModal, setProjectModal] = useState(false);
@@ -154,7 +155,7 @@ export default function ProjectAndCV({projectAndCVFormRef}) {
                               onChangeText={text => (detail.value = text)}
                               placeholderTextColor="gray"
                               placeholder={detail.placeholder}
-                              style={styles.input}
+                              style={globalStyles.input}
                             />
                             <Pressable
                               onPress={() =>
@@ -173,17 +174,17 @@ export default function ProjectAndCV({projectAndCVFormRef}) {
         )}
       </Formik>
       <Modal animationType="fade" transparent={true} visible={projectModal}>
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
+        <View style={globalStyles.centeredView}>
+          <View style={globalStyles.modalView}>
             <FormTitle title="Proje Adı" />
             <TextInput
               onChangeText={value => setProjectName(value)}
               value={projectName}
               placeholderTextColor="gray"
               placeholder="Proje Adı"
-              style={[styles.input, {width: 250}]}
+              style={[globalStyles.input, {width: 250}]}
             />
-            <View style={styles.modalButtonArea}>
+            <View style={globalStyles.modalButtonArea}>
               <Pressable
                 onPress={() => {
                   setProjectModal(false);

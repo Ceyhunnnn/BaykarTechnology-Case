@@ -19,7 +19,7 @@ import {
   ProjectIcon,
   StartIcon,
 } from '../../components/Icons';
-import {generateExperienceScore} from '../../utils/ConstantData';
+import {generateExperienceScore} from '../../utils/constantData';
 import LoadingIndicator from './../../components/loading';
 
 function DashboardScreen({navigation}) {
