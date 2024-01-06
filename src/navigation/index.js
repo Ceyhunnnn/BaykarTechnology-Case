@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/react-in-jsx-scope */
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -7,7 +8,6 @@ import LoginScreen from './../screens/LoginScreen';
 import DashboardScreen from './../screens/DashboardScreen';
 import FakeApiScreen from './../screens/FakeApiScreen';
 import RegisterScreen from './../screens/RegisterScreen';
-import {useEffect} from 'react';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -36,9 +36,6 @@ const HomeLayout = () => {
 };
 
 const Routes = () => {
-  useEffect(() => {
-    console.log('first');
-  }, []);
   return (
     <NavigationContainer>
       <Stack.Navigator>
@@ -58,6 +55,7 @@ const Routes = () => {
           }}
           component={RegisterScreen}
         />
+
         <Stack.Screen
           name={PathConstant.HOME_LAYOUT}
           component={HomeLayout}
