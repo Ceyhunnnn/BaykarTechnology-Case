@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   username: {
-    color: '#888',
+    color: '#4f4f4f',
     marginBottom: 4,
   },
   email: {
