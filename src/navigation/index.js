@@ -8,6 +8,11 @@ import LoginScreen from './../screens/LoginScreen';
 import DashboardScreen from './../screens/DashboardScreen';
 import FakeApiScreen from './../screens/FakeApiScreen';
 import RegisterScreen from './../screens/RegisterScreen';
+import {useEffect, useState} from 'react';
+import AsyncStorageService from '../service/AsyncStorage';
+import {useDispatch, useSelector} from 'react-redux';
+import {setLoginState} from '../features/login/loginSlice';
+import {ActivityIndicator} from 'react-native';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -36,26 +41,44 @@ const HomeLayout = () => {
 };
 
 const Routes = () => {
+  const [loading, setLoading] = useState(true);
+  const isLogin = useSelector(state => state.login.value);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    async function checkUserLogin() {
+      const loginData = await AsyncStorageService.getStorage('isLogin');
+      console.log('Route : ', isLogin);
+      dispatch(setLoginState(JSON.parse(loginData)));
+      setLoading(false);
+    }
+    checkUserLogin();
+  }, [isLogin]);
+  if (loading) {
+    return <ActivityIndicator />;
+  }
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen
-          name={PathConstant.LOGIN}
-          options={{
-            headerShown: false,
-            title: 'Login',
-          }}
-          component={LoginScreen}
-        />
-        <Stack.Screen
-          name={PathConstant.REGISTER}
-          options={{
-            headerShown: false,
-            title: 'Register Form',
-          }}
-          component={RegisterScreen}
-        />
-
+        {!isLogin && (
+          <>
+            <Stack.Screen
+              name={PathConstant.LOGIN}
+              options={{
+                headerShown: false,
+                title: 'Login',
+              }}
+              component={LoginScreen}
+            />
+            <Stack.Screen
+              name={PathConstant.REGISTER}
+              options={{
+                headerShown: false,
+                title: 'Register Form',
+              }}
+              component={RegisterScreen}
+            />
+          </>
+        )}
         <Stack.Screen
           name={PathConstant.HOME_LAYOUT}
           component={HomeLayout}

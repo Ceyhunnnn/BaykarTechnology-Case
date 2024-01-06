@@ -20,8 +20,7 @@ function DashboardScreen({navigation}) {
     getAllData();
   }, []);
   const logoutEvent = async () => {
-    // await Logout().then(() => navigation.navigate(PathConstant.LOGIN));
-    AsyncStorageService.setStorage('isLogin', 'false');
+    await Logout().then(() => navigation.replace(PathConstant.LOGIN));
   };
   if (loading) {
     return (
