@@ -47,7 +47,6 @@ const Routes = () => {
   useEffect(() => {
     async function checkUserLogin() {
       const loginData = await AsyncStorageService.getStorage('isLogin');
-      console.log('Route : ', isLogin);
       dispatch(setLoginState(JSON.parse(loginData)));
       setLoading(false);
     }
