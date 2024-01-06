@@ -19,7 +19,6 @@ export const workTypes = [
     value: 'İşsiz (Jobless)',
   },
 ];
-
 export const jobTypes = [
   {id: 'doc1', label: 'Doktor', value: 'doktor'},
   {id: 'eng2', label: 'Mühendis', value: 'muhendis'},

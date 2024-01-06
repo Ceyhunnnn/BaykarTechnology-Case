@@ -42,9 +42,9 @@ export default function PersonalScreen({personalFormRef}) {
     fetch(REST_COUNTRY_API)
       .then(response => response.json())
       .then(json => {
-        const countryData = json.map((country, index) => ({
-          label: country.name.common,
-          value: country.name.common,
+        const countryData = json?.map((country, index) => ({
+          label: country?.name?.common,
+          value: country?.name?.common,
           key: 'Country' + index,
         }));
         setLoading(false);
@@ -63,7 +63,7 @@ export default function PersonalScreen({personalFormRef}) {
       })
         .then(response => response.json())
         .then(json => {
-          const cityData = json.data.map((city, index) => ({
+          const cityData = json?.data?.map((city, index) => ({
             label: city,
             value: city,
             key: 'City' + index,

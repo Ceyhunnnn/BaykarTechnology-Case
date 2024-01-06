@@ -13,5 +13,23 @@ const AsyncStorageService = {
   async deleteAllStorage() {
     return await AsyncStorage.clear();
   },
+  async getAllStorage() {
+    return await AsyncStorage.multiGet([
+      'personal',
+      'work',
+      'education',
+      'project',
+    ]).then(response => {
+      if (response) {
+        const body = {
+          personal: JSON.parse(response[0][1]),
+          work: JSON.parse(response[1][1]),
+          education: JSON.parse(response[2][1]),
+          project: JSON.parse(response[3][1]),
+        };
+        return body;
+      }
+    });
+  },
 };
 export default AsyncStorageService;

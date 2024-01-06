@@ -6,6 +6,7 @@ import {
   KeyboardAvoidingView,
   Platform,
   ScrollView,
+  Alert,
 } from 'react-native';
 import React, {useState, useRef} from 'react';
 import {styles} from './styles';
@@ -15,49 +16,18 @@ import Education from './../StepperScreens/Education';
 import ProjectAndCV from './../StepperScreens/ProjectAndCV';
 import Button from '../../components/button';
 import {isObjectEmpty} from '../../utils/objectIsEmpty';
-export default function RegisterScreen() {
+import AsyncStorageService from '../../service/AsyncStorage';
+import isEqual from 'lodash/isEqual';
+import {PathConstant} from '../../navigation/PathConstant';
+
+export default function RegisterScreen({navigation}) {
+  const [allDataAsync, setAllData] = useState(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [stepError, setStepError] = useState(null);
   const personalFormRef = useRef();
   const workAndJobFormRef = useRef();
   const educationFormRef = useRef();
   const projectAndCVFormRef = useRef();
-  const [currentIndex, setCurrentIndex] = useState(3);
-
-  const personalFormSubmit = async () => {
-    await personalFormRef.current
-      .submitForm()
-      .then(response => console.log('Personal Form Submit : ', response))
-      .catch(res => null);
-    if (isObjectEmpty(personalFormRef.current.errors)) {
-      setCurrentIndex(prevState => prevState + 1);
-    }
-  };
-  const workAndJobFormSubmit = async () => {
-    await workAndJobFormRef.current
-      .submitForm()
-      .then(response => console.log('Work Form Submit : ', response))
-      .catch(res => null);
-    if (isObjectEmpty(workAndJobFormRef.current.errors)) {
-      setCurrentIndex(prevState => prevState + 1);
-    }
-  };
-  const educationFormSubmit = async () => {
-    await educationFormRef.current
-      .submitForm()
-      .then(response => console.log('Work Form Submit : ', response))
-      .catch(res => null);
-    if (isObjectEmpty(educationFormRef.current.errors)) {
-      setCurrentIndex(prevState => prevState + 1);
-    }
-  };
-  const projectAndCVFormSubmit = async () => {
-    await projectAndCVFormRef.current
-      .submitForm()
-      .then(response => console.log('project Form Submit : ', response))
-      .catch(res => null);
-    if (isObjectEmpty(educationFormRef.current.errors)) {
-    }
-  };
-
   const registerTabItems = [
     {
       id: 0,
@@ -95,6 +65,122 @@ export default function RegisterScreen() {
     }
     if (registerTabItems[currentIndex].save) {
       registerTabItems[currentIndex].save();
+    }
+  };
+  const nextPage = () => {
+    setCurrentIndex(prevState => prevState + 1);
+  };
+  const getAllData = async () => {
+    setStepError(null);
+    const body = await AsyncStorageService.getAllStorage();
+    setAllData(body);
+  };
+  const personalFormSubmit = async () => {
+    await personalFormRef.current
+      .submitForm()
+      .then(response => console.log('Personal Form Submit : ', response))
+      .catch(res => null);
+    if (isObjectEmpty(personalFormRef.current.errors)) {
+      await AsyncStorageService.setStorage(
+        'personal',
+        JSON.stringify(personalFormRef.current.values),
+      )
+        .then(res => {
+          AsyncStorageService.setStorage('isComplated', 'false');
+          nextPage();
+        })
+        .catch(err => {
+          if (err) {
+            Alert.alert('Kayıt başarısız, lütfen tekrar deneyin');
+          }
+        });
+    }
+  };
+  const workAndJobFormSubmit = async () => {
+    await workAndJobFormRef.current
+      .submitForm()
+      .then(response => console.log('Work Form Submit : ', response))
+      .catch(res => null);
+    await getAllData();
+    if (
+      allDataAsync?.work === null ||
+      !isEqual(workAndJobFormRef.current.values, allDataAsync?.work)
+    ) {
+      await AsyncStorageService.setStorage(
+        'work',
+        JSON.stringify(workAndJobFormRef.current.values),
+      )
+        .then(res => null)
+        .catch(err => {
+          if (err) {
+            setStepError(err);
+            Alert.alert('Kayıt başarısız, lütfen tekrar deneyin');
+          }
+        });
+    }
+    if (isObjectEmpty(workAndJobFormRef.current.errors) && stepError === null) {
+      nextPage();
+      setStepError(null);
+    }
+  };
+  const educationFormSubmit = async () => {
+    await educationFormRef.current
+      .submitForm()
+      .then(response => console.log('Work Form Submit : ', response))
+      .catch(res => null);
+    await getAllData();
+    if (
+      allDataAsync?.education === null ||
+      !isEqual(educationFormRef.current.values, allDataAsync?.education)
+    ) {
+      await AsyncStorageService.setStorage(
+        'education',
+        JSON.stringify(educationFormRef.current.values),
+      )
+        .then(res => null)
+        .catch(err => {
+          if (err) {
+            setStepError(err);
+            Alert.alert('Kayıt başarısız, lütfen tekrar deneyin');
+          }
+        });
+    }
+    if (isObjectEmpty(educationFormRef.current.errors) && stepError === null) {
+      nextPage();
+      setStepError(null);
+    }
+  };
+  const projectAndCVFormSubmit = async () => {
+    await projectAndCVFormRef.current
+      .submitForm()
+      .then(response => console.log('project Form Submit : ', response))
+      .catch(res => null);
+    await getAllData();
+    if (
+      allDataAsync?.project === null ||
+      !isEqual(projectAndCVFormRef.current.values, allDataAsync?.project)
+    ) {
+      await AsyncStorageService.setStorage(
+        'project',
+        JSON.stringify(projectAndCVFormRef.current.values),
+      )
+        .then(res => null)
+        .catch(err => {
+          if (err) {
+            setStepError(err);
+            Alert.alert('Kayıt başarısız, lütfen tekrar deneyin');
+          }
+        });
+    }
+    if (
+      isObjectEmpty(projectAndCVFormRef.current.errors) &&
+      stepError === null
+    ) {
+      setStepError(null);
+      AsyncStorageService.setStorage('isComplated', 'true').then(data => {
+        Alert.alert('Kayıt başarıyla tamamlanmıştır, giriş yapabilirsiniz');
+        navigation.navigate(PathConstant.LOGIN);
+      });
     }
   };
 
