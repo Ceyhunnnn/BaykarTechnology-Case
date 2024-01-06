@@ -69,7 +69,6 @@ export default function ProjectAndCV({projectAndCVFormRef}) {
       id: project.detailList.length + 1,
     });
     updateProjectList(project);
-    projectAndCVFormRef.current.setFieldValue('projectDetail', projectList);
   };
   const deleteProjectDetail = (project, detail) => {
     const updatedList = project.detailList.filter(
