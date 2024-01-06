@@ -1,7 +1,3 @@
-export const REST_COUNTRY_API_URL = 'https://restcountries.com/v3.1/all';
-export const REST_CITY_API_URL =
-  'https://countriesnow.space/api/v0.1/countries/cities';
-
 export const genderList = [
   {id: 'KF1', label: 'Kadın', value: 'Kadın'},
   {id: 'EM1', label: 'Erkek', value: 'Erkek'},

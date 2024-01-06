@@ -13,11 +13,7 @@ import RNPickerSelect from 'react-native-picker-select';
 import PhoneInput from 'react-native-phone-input';
 import DatePicker from 'react-native-date-picker';
 import ErrorText from '../../../components/ErrorText';
-import {
-  REST_COUNTRY_API_URL,
-  REST_CITY_API_URL,
-  genderList,
-} from '../../../utils/constantData';
+import {genderList} from '../../../utils/constantData';
 import FormTitle from '../../../components/FormTitle';
 import {DeleteIcon} from '../../../components/Icons';
 import globalStyles from '../../../utils/globalStyles';
@@ -29,6 +25,9 @@ export default function PersonalScreen({personalFormRef}) {
   const [selectedCountry, setSelectedCountry] = useState(null);
   const [countries, setCountries] = useState('');
   const [cities, setCities] = useState('');
+  const REST_COUNTRY_API_URL = 'https://restcountries.com/v3.1/all';
+  const REST_CITY_API_URL =
+    'https://countriesnow.space/api/v0.1/countries/cities';
   const uploadImage = () => {
     launchImageLibrary({}, async response => {
       if (!response.didCancel) {
