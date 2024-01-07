@@ -1,11 +1,9 @@
 /* eslint-disable react-native/no-inline-styles */
-import {View, Text, Image, ScrollView, Pressable} from 'react-native';
+import {View, Text, Image, ScrollView} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {styles} from './styles';
 import AsyncStorageService from '../../service/AsyncStorage';
 import FormTitle from '../../components/FormTitle';
-import {Logout} from '../../modules/Logout';
-import {PathConstant} from '../../navigation/PathConstant';
 import {
   CalendarIcon,
   CheckIcon,
@@ -35,9 +33,6 @@ function DashboardScreen({navigation}) {
     }
     getAllData();
   }, []);
-  const logoutEvent = async () => {
-    await Logout().then(() => navigation.replace(PathConstant.LOGIN));
-  };
 
   if (loading) {
     return <LoadingIndicator />;
@@ -176,17 +171,6 @@ function DashboardScreen({navigation}) {
             </View>
           </>
         )}
-        <Pressable onPress={logoutEvent}>
-          <Text
-            style={{
-              textAlign: 'center',
-              marginVertical: 10,
-              fontSize: 18,
-              color: 'red',
-            }}>
-            Hesabı Sil
-          </Text>
-        </Pressable>
       </ScrollView>
     </View>
   );

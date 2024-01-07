@@ -59,5 +59,11 @@ const globalStyles = StyleSheet.create({
     width: 200,
     height: 50,
   },
+  logoutButton: {
+    textAlign: 'center',
+    marginVertical: 20,
+    fontSize: 15,
+    color: 'red',
+  },
 });
 export default globalStyles;

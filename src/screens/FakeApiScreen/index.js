@@ -1,8 +1,11 @@
+/* eslint-disable react-native/no-inline-styles */
 /* eslint-disable react/no-unstable-nested-components */
-import {FlatList, SafeAreaView} from 'react-native';
+import {View} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import LoadingIndicator from './../../components/loading';
-import FakeApiCard from '../../components/fakeApiCard';
+import FormTitle from '../../components/FormTitle';
+import TableComponent from '../../components/table';
+import {styles} from './styles';
 function FakeApiScreen() {
   const [fakeData, setFakeData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -10,7 +13,11 @@ function FakeApiScreen() {
     fetch('https://jsonplaceholder.typicode.com/users')
       .then(response => response.json())
       .then(json => {
-        setFakeData(json);
+        const tableData = [];
+        json.map(data => {
+          tableData.push(Object.values(data).slice(0, 3));
+        });
+        setFakeData({head: ['Id', 'Name', 'Username'], data: tableData});
         setLoading(false);
       });
   }, []);
@@ -18,16 +25,17 @@ function FakeApiScreen() {
     return <LoadingIndicator />;
   }
 
-  const FakeApiComponent = ({user}) => <FakeApiCard user={user} />;
-
   return (
-    <SafeAreaView>
-      <FlatList
-        data={fakeData}
-        renderItem={({item}) => <FakeApiComponent user={item} />}
-        keyExtractor={item => item.id}
-      />
-    </SafeAreaView>
+    <View style={{flex: 1}}>
+      <FormTitle title="Fake api veri Tablosu" />
+      <View style={styles.card}>
+        <TableComponent
+          tableHead={fakeData.head}
+          tableData={fakeData.data}
+          width={[60, 150, 150]}
+        />
+      </View>
+    </View>
   );
 }
 export default FakeApiScreen;
