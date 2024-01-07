@@ -179,7 +179,7 @@ export default function RegisterScreen({navigation}) {
       setStepError(null);
       AsyncStorageService.setStorage('isComplated', 'true').then(data => {
         Alert.alert('Kayıt başarıyla tamamlanmıştır, giriş yapabilirsiniz');
-        navigation.navigate(PathConstant.LOGIN);
+        navigation.replace(PathConstant.LOGIN);
       });
     }
   };
