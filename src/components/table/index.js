@@ -1,7 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {Component} from 'react';
 import {StyleSheet, View} from 'react-native';
-import {Table, Row, Rows} from 'react-native-table-component';
+import {Table, Row} from 'react-native-table-component';
 
 export default class TableComponent extends Component {
   constructor(props) {
@@ -13,16 +13,19 @@ export default class TableComponent extends Component {
       <View style={styles.container}>
         <Table borderStyle={{borderWidth: 2, borderColor: '#c8e1ff', flex: 1}}>
           <Row
-            widthArr={this.props.width}
             data={this.props.tableHead}
             style={styles.head}
             textStyle={styles.text}
+            flexArr={this.props.width}
           />
-          <Rows
-            widthArr={this.props.width}
-            data={this.props.tableData}
-            textStyle={styles.text}
-          />
+          {this.props.tableData.map((rowData, index) => (
+            <Row
+              key={index}
+              data={rowData}
+              textStyle={styles.text}
+              flexArr={this.props.width}
+            />
+          ))}
         </Table>
       </View>
     );
