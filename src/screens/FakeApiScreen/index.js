@@ -60,7 +60,7 @@ function FakeApiScreen() {
   }
   return (
     <ScrollView style={{flex: 1}}>
-      <FormTitle title="Fake api veri Tablosu" />
+      <FormTitle title="Fake Api Veri Tablosu" />
       <View style={styles.card}>
         <TableComponent
           tableHead={fakeData.head}
