@@ -37,5 +37,27 @@ const globalStyles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
+  drawerMenu: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginHorizontal: 20,
+    padding: 5,
+    borderRadius: 10,
+    gap: 15,
+    marginVertical: 8,
+    borderBottomWidth: 0.3,
+    borderBottomColor: '#4F4F4F',
+  },
+  logoAreaBaykar: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  baykarLogo: {
+    width: 200,
+    height: 50,
+  },
 });
 export default globalStyles;

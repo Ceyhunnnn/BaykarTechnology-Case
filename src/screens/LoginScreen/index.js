@@ -41,7 +41,7 @@ export default function LoginScreen({navigation}) {
     } else {
       if (JSON.parse(isComplated)) {
         await AsyncStorageService.setStorage('isLogin', 'true');
-        navigation.replace(PathConstant.HOME_LAYOUT);
+        navigation.replace(PathConstant.DRAWER_LAYOUT);
       }
     }
   };
