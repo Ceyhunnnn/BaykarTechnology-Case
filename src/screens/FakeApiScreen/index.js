@@ -37,7 +37,7 @@ function FakeApiScreen() {
         strokeWidth: 2,
       },
     ],
-    legend: ['Ortalama Sıcaklık'],
+    legend: ['İstanbul ili Ortalama Sıcaklık'],
   };
   const chartConfig = {
     backgroundColor: '#e26a00',
@@ -74,7 +74,7 @@ function FakeApiScreen() {
           data={chartData}
           width={screenWidth - 20}
           height={220}
-          style={{borderRadius: 10}}
+          style={{borderRadius: 5}}
           chartConfig={chartConfig}
         />
       </View>
