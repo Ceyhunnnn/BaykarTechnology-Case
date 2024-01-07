@@ -158,14 +158,19 @@ function DashboardScreen({navigation}) {
                     <Text style={{fontWeight: '600'}}>{proj.projectName}</Text>
                   </View>
                   {proj.detailList &&
-                    proj.detailList.map(detail => (
-                      <View key={detail.id} style={styles.projectDetailArea}>
-                        <CheckIcon size={20} color="green" />
-                        <Text style={{fontStyle: 'italic'}}>
-                          {detail.value}
-                        </Text>
-                      </View>
-                    ))}
+                    proj.detailList.map(
+                      detail =>
+                        detail.value && (
+                          <View
+                            key={detail.id}
+                            style={styles.projectDetailArea}>
+                            <CheckIcon size={20} color="green" />
+                            <Text style={{fontStyle: 'italic'}}>
+                              {detail.value}
+                            </Text>
+                          </View>
+                        ),
+                    )}
                 </View>
               ))}
             </View>
