@@ -20,21 +20,24 @@ function FakeApiScreen() {
         json.map(data => {
           tableData.push(Object.values(data).slice(0, 3));
         });
-        setFakeData({head: ['Id', 'Name', 'Username'], data: tableData});
+        setFakeData({
+          head: ['Sıra No', 'Adı', 'Kullanıcı Adı'],
+          data: tableData,
+        });
         setLoading(false);
       });
   }, []);
 
   const chartData = {
-    labels: ['January', 'February', 'March', 'April', 'May'],
+    labels: ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs'],
     datasets: [
       {
-        data: [20, 45, 28, 80, 99],
+        data: [5, 7, 9, 13, 18],
         color: (opacity = 1) => `rgba(134, 65, 244, ${opacity})`,
         strokeWidth: 2,
       },
     ],
-    legend: ['Rainy Days'],
+    legend: ['Ortalama Sıcaklık'],
   };
   const chartConfig = {
     backgroundColor: '#e26a00',
