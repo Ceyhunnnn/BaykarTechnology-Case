@@ -9,7 +9,6 @@ import {
   KeyboardAvoidingView,
   Pressable,
   Platform,
-  Alert,
 } from 'react-native';
 import React from 'react';
 import {styles} from './styles';
@@ -19,32 +18,10 @@ import {Formik} from 'formik';
 import {loginValidation} from './validation';
 import {PathConstant} from '../../navigation/PathConstant';
 import ErrorText from '../../components/ErrorText';
-import AsyncStorageService from '../../service/AsyncStorage';
-import isEqual from 'lodash/isEqual';
 import globalStyles from '../../utils/globalStyles';
+import {login} from '../../modules/login';
 
 export default function LoginScreen({navigation}) {
-  const login = async values => {
-    const localData = await AsyncStorageService.getStorage('personal');
-    const isComplated = await AsyncStorageService.getStorage('isComplated');
-    const parsedData = JSON.parse(localData)
-      ? {
-          name: JSON.parse(localData)?.name,
-          surname: JSON.parse(localData)?.surname,
-        }
-      : null;
-    if (parsedData === null) {
-      Alert.alert('Böyle bir kullanıcı bulunamadı, lütfen kayıt olun.');
-    }
-    if (parsedData !== null && !isEqual(parsedData, values)) {
-      Alert.alert('Kullanıcı adı veya soyadı hatalı');
-    } else {
-      if (JSON.parse(isComplated)) {
-        await AsyncStorageService.setStorage('isLogin', 'true');
-        navigation.replace(PathConstant.DRAWER_LAYOUT);
-      }
-    }
-  };
   const navigateToRegister = () => {
     navigation.navigate(PathConstant.REGISTER);
   };
@@ -62,7 +39,7 @@ export default function LoginScreen({navigation}) {
           </View>
           <Formik
             initialValues={{name: '', surname: ''}}
-            onSubmit={values => login(values)}
+            onSubmit={values => login(values, navigation)}
             validationSchema={loginValidation}>
             {({handleChange, handleBlur, handleSubmit, values, errors}) => (
               <View style={styles.inputArea}>
